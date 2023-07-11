@@ -10,6 +10,8 @@ class CharacterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
+    final double height = MediaQuery.of(context).size.height;
     return CustomCard(
       onTap: () {},
       borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -18,43 +20,54 @@ class CharacterCard extends StatelessWidget {
         children: [
           buildImage(),
           SizedBox(width: 10.0),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  character.name,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
+          Container(
+            width: width,
+            height: height,
+            child: ListView.builder(
+              itemCount: character.results!.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        character.results![index].name!,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Container(
+                            height: 7.0,
+                            width: 7.0,
+                            decoration: BoxDecoration(
+                              color: statusColor(),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          SizedBox(width: 5.0),
+                          Text(
+                            '${character.results![index].status!} - ${character.results![index].species!}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5.0),
+                      buildInfo('Last known location:',
+                          character.results![index].origin!.name),
+                      SizedBox(height: 5.0),
+                      buildInfo(
+                          'Origin:', character.results![index].location!.name),
+                    ],
                   ),
-                ),
-                Row(
-                  children: [
-                    Container(
-                      height: 7.0,
-                      width: 7.0,
-                      decoration: BoxDecoration(
-                        color: statusColor(),
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    SizedBox(width: 5.0),
-                    Text(
-                      '${character.status} - ${character.species}',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14.0,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 5.0),
-                buildInfo('Last known location:', character.origin.name),
-                SizedBox(height: 5.0),
-                buildInfo('Origin:', character.location.name),
-              ],
+                );
+              },
             ),
           ),
         ],
