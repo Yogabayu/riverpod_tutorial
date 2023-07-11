@@ -15,11 +15,12 @@ final allFilterKey = UniqueKey();
 /// We are using [StateNotifierProvider] here as a `List<Todo>` is a complex
 /// object, with advanced business logic like how to edit a todo.
 final todoListProvider = StateNotifierProvider<TodoList, List<Todo>>((ref) {
-  return TodoList(const [
-    Todo(id: 'todo-0', description: 'hi'),
-    Todo(id: 'todo-1', description: 'hello'),
-    Todo(id: 'todo-2', description: 'bonjour'),
-  ]);
+  // return TodoList(const [
+  //   Todo(id: 'todo-0', description: 'hi'),
+  //   Todo(id: 'todo-1', description: 'hello'),
+  //   Todo(id: 'todo-2', description: 'bonjour'),
+  // ]);
+  return TodoList();
 });
 
 /// The different ways to filter the list of todos
@@ -33,7 +34,7 @@ enum TodoListFilter {
 ///
 /// We use [StateProvider] here as there is no fancy logic behind manipulating
 /// the value since it's just enum.
-final todoListFilter = StateProvider((_) => TodoListFilter.all);
+final todoListFilter = StateProvider((_) => TodoListFilter.active);
 
 /// The number of uncompleted todos
 ///
