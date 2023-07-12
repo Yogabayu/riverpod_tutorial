@@ -27,7 +27,8 @@ class HomeScreen extends HookConsumerWidget {
           itemCount: 1,
           itemBuilder: (BuildContext context, int index) {
             if (viewModel.characters?.results?.isNotEmpty == true) {
-              Character? character = viewModel.characters;
+              Character? character = viewModel.characters
+                  as Character?; //hilangkan "as Character?" jika tidak bisa
               return Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 5.0,

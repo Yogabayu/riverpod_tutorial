@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:riverpod_tutorial/src/data/models/character.dart';
+import '../data/models/character.dart';
 // import 'package:riverpod_tutorial/src/data/models/character.dart';
 
 import '../utils/util.dart';

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:riverpod_tutorial/src/data/models/character.dart';
+import '../../data/models/character.dart';
 
 import '../../utils/constants.dart';
 
