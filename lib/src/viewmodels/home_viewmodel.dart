@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+// import 'package:riverpod_tutorial/src/data/models/character.dart';
 
 import '../utils/util.dart';
 import '../data/service/network_service.dart';
@@ -6,10 +7,11 @@ import '../data/service/network_service.dart';
 class HomeViewModel extends ChangeNotifier {
   HomeViewModel() {
     getCharacters();
+    notifyListeners();
   }
 
   NetworkService service = NetworkService();
-  List characters = [];
+  Map characters = {};
   APIRequestStatus requestStatus = APIRequestStatus.loading;
 
   getCharacters() async {
@@ -17,7 +19,8 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
     try {
       Map body = await service.getCharacters();
-      characters = body['results'];
+      characters = body;
+      // print(characters);
       requestStatus = APIRequestStatus.loaded;
       notifyListeners();
     } catch (e) {

@@ -37,12 +37,13 @@ class _SplashScreenState extends State<SplashScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset(
-              "assets/images/black_icon.png",
-              color: Theme.of(context).textTheme.titleLarge!.color,
-              height: 150,
-              width: 150,
-            ),
+            // Image.asset(
+            //   "assets/images/black_icon.png",
+            //   color: Theme.of(context).textTheme.titleLarge!.color,
+            //   height: 150,
+            //   width: 150,
+            // ),
+            Text("RIVERPOD API TUTORIAL")
           ],
         ),
       ),
