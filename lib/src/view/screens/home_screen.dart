@@ -24,21 +24,22 @@ class HomeScreen extends HookConsumerWidget {
         reload: () => viewModel.getCharacters(),
         child: ListView.builder(
           physics: ClampingScrollPhysics(),
-          itemCount: viewModel.characters.length,
+          itemCount: 1,
           itemBuilder: (BuildContext context, int index) {
-            // Character character = Character.fromJson(viewModel.characters);
-            Character character = Character.fromJson(
-                Map<String, dynamic>.from(viewModel.characters));
-            return Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 5.0,
-                horizontal: 10.0,
-              ),
-              child: CharacterCard(character: character),
-            );
+            if (viewModel.characters?.results?.isNotEmpty == true) {
+              Character? character = viewModel.characters;
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 5.0,
+                  horizontal: 10.0,
+                ),
+                child: CharacterCard(character: character),
+              );
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
           },
         ),
-        // child: Text("s"),
       ),
     );
   }

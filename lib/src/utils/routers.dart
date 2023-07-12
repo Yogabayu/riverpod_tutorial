@@ -15,10 +15,10 @@ class Routers {
         return MaterialPageRoute(builder: (_) => DetailScreen());
       default:
         return MaterialPageRoute(
-            builder: (_) => Scaffold(
-              body: Center(
-                  child: Text('No route defined for ${settings.name}')),
-            ));
+          builder: (_) => Scaffold(
+            body: Center(child: Text('No route defined for ${settings.name}')),
+          ),
+        );
     }
   }
 }

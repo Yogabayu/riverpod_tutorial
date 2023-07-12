@@ -4,7 +4,7 @@ import '../../data/models/character.dart';
 import 'custom_card.dart';
 
 class CharacterCard extends StatelessWidget {
-  final Character character;
+  final Character? character;
 
   CharacterCard({required this.character});
 
@@ -17,23 +17,22 @@ class CharacterCard extends StatelessWidget {
       borderRadius: BorderRadius.all(Radius.circular(10.0)),
       child: Container(
         width: width,
-        height: height,
+        height: height * 0.88,
         child: ListView.builder(
-          itemCount: character.results!.length,
+          itemCount: character!.results!.length,
           itemBuilder: (context, index) {
             return Container(
               margin: EdgeInsets.only(bottom: 5),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // buildImage(character.results![index].image!),
                   ClipRRect(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10.0),
                       bottomLeft: Radius.circular(10.0),
                     ),
                     child: Image.network(
-                      character.results![index].image!,
+                      character!.results![index].image!,
                       height: 145.0,
                     ),
                   ),
@@ -46,7 +45,7 @@ class CharacterCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          character.results![index].name!,
+                          character!.results![index].name!,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18.0,
@@ -59,13 +58,13 @@ class CharacterCard extends StatelessWidget {
                               width: 7.0,
                               decoration: BoxDecoration(
                                 color: statusColor(
-                                    character.results![index].status!),
+                                    character!.results![index].status!),
                                 shape: BoxShape.circle,
                               ),
                             ),
                             SizedBox(width: 5.0),
                             Text(
-                              '${character.results![index].status!} - ${character.results![index].species!}',
+                              '${character!.results![index].status!} - ${character!.results![index].species!}',
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 14.0,
@@ -75,10 +74,10 @@ class CharacterCard extends StatelessWidget {
                         ),
                         SizedBox(height: 5.0),
                         buildInfo('Last known location:',
-                            character.results![index].origin!.name),
+                            character!.results![index].origin!.name),
                         SizedBox(height: 5.0),
                         buildInfo('Origin:',
-                            character.results![index].location!.name),
+                            character!.results![index].location!.name),
                       ],
                     ),
                   ),
@@ -88,21 +87,22 @@ class CharacterCard extends StatelessWidget {
           },
         ),
       ),
+      // child: Text("data"),
     );
   }
 
-  buildImage(image) {
-    return ClipRRect(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(10.0),
-        bottomLeft: Radius.circular(10.0),
-      ),
-      child: Image.network(
-        image,
-        height: 145.0,
-      ),
-    );
-  }
+  // buildImage(image) {
+  //   return ClipRRect(
+  //     borderRadius: BorderRadius.only(
+  //       topLeft: Radius.circular(10.0),
+  //       bottomLeft: Radius.circular(10.0),
+  //     ),
+  //     child: Image.network(
+  //       image,
+  //       height: 145.0,
+  //     ),
+  //   );
+  // }
 
   buildInfo(title, content) {
     return Column(

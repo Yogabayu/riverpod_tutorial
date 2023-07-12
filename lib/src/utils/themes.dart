@@ -9,6 +9,7 @@ class Themes {
   static Color darkBG = Color(0xff121212);
 
   static ThemeData lightTheme = ThemeData(
+    // ignore: deprecated_member_use
     backgroundColor: lightBG,
     primaryColor: lightPrimary,
     hintColor: lightAccent,
@@ -20,6 +21,7 @@ class Themes {
 
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
+    // ignore: deprecated_member_use
     backgroundColor: darkBG,
     primaryColor: darkPrimary,
     hintColor: darkAccent,
