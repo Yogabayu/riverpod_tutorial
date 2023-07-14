@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class DetailScreen extends HookConsumerWidget {
+class LocationScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      body: Container(
-        child: Text("screen2"),
-      ),
+    return Container(
+      child: Text("screen location"),
     );
   }
 }

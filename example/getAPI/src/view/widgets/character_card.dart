@@ -17,7 +17,7 @@ class CharacterCard extends StatelessWidget {
       borderRadius: BorderRadius.all(Radius.circular(10.0)),
       child: Container(
         width: width,
-        height: height * 0.88,
+        height: height * 0.82,
         child: ListView.builder(
           itemCount: character!.results!.length,
           itemBuilder: (context, index) {

@@ -4,4 +4,4 @@ import '../viewmodels/home_viewmodel.dart';
 
 final homeProvider = ChangeNotifierProvider((_) => HomeViewModel());
 
-final seledtedBottomMenu = Provider<int>((ref) => 0);
+// final seledtedBottomMenu = Provider<int>((ref) => 0);
