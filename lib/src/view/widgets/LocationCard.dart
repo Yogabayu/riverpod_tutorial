@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import '../../../src/data/models/location.dart';
 
-import '../../data/models/character.dart';
 import 'custom_card.dart';
 
-class CharacterCard extends StatelessWidget {
-  final Character? character;
+class LocationCard extends StatelessWidget {
+  final Location? location;
 
-  CharacterCard({required this.character});
+  LocationCard({required this.location});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class CharacterCard extends StatelessWidget {
         width: width,
         height: height * 0.82,
         child: ListView.builder(
-          itemCount: character!.results!.length,
+          itemCount: location!.results!.length,
           itemBuilder: (context, index) {
             return Container(
               margin: EdgeInsets.only(bottom: 5),
@@ -31,9 +31,12 @@ class CharacterCard extends StatelessWidget {
                       topLeft: Radius.circular(10.0),
                       bottomLeft: Radius.circular(10.0),
                     ),
-                    child: Image.network(
-                      character!.results![index].image!,
-                      height: 145.0,
+                    child: Text(
+                      location!.results![index].id!.toString(),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -45,7 +48,7 @@ class CharacterCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          character!.results![index].name!,
+                          location!.results![index].name!,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18.0,
@@ -53,18 +56,16 @@ class CharacterCard extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            Container(
-                              height: 7.0,
-                              width: 7.0,
-                              decoration: BoxDecoration(
-                                color: statusColor(
-                                    character!.results![index].status!),
-                                shape: BoxShape.circle,
+                            Text(
+                              '${location!.results![index].type!}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14.0,
                               ),
                             ),
                             SizedBox(width: 5.0),
                             Text(
-                              '${character!.results![index].status!} - ${character!.results![index].species!}',
+                              '${location!.results![index].dimension!}',
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 14.0,
@@ -73,11 +74,9 @@ class CharacterCard extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 5.0),
-                        buildInfo('Last known location:',
-                            character!.results![index].origin!.name),
+                        buildInfo('Total Residents:',
+                            location!.results![index].residents!.length),
                         SizedBox(height: 5.0),
-                        buildInfo('Origin:',
-                            character!.results![index].location!.name),
                       ],
                     ),
                   ),

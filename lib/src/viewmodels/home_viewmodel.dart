@@ -5,6 +5,7 @@ import 'package:riverpod_tutorial/src/view/screens/location_screen.dart';
 import '../data/models/character.dart';
 // import 'package:riverpod_tutorial/src/data/models/character.dart';
 
+import '../data/models/location.dart';
 import '../utils/util.dart';
 import '../data/service/network_service.dart';
 
@@ -17,6 +18,7 @@ class HomeViewModel extends ChangeNotifier {
   int selectedMenu = 0;
   NetworkService service = NetworkService();
   Character? characters;
+  Location? locations;
   APIRequestStatus requestStatus = APIRequestStatus.loading;
   BottomMenu bottomMenu = BottomMenu.character;
   List<Widget> pages = <Widget>[
@@ -31,12 +33,12 @@ class HomeViewModel extends ChangeNotifier {
         label: 'Character',
       ),
       BottomNavigationBarItem(
-        icon: Icon(Icons.location_on_outlined),
-        label: 'Location',
-      ),
-      BottomNavigationBarItem(
         icon: Icon(Icons.book_outlined),
         label: 'Episode',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.location_on_outlined),
+        label: 'Location',
       ),
     ];
   }
@@ -53,6 +55,30 @@ class HomeViewModel extends ChangeNotifier {
       Character body = await service.getCharacters();
       if (body.results!.length > 0) {
         characters = body;
+        requestStatus = APIRequestStatus.loaded;
+        notifyListeners();
+      } else {
+        requestStatus = APIRequestStatus.loading;
+        notifyListeners();
+      }
+    } catch (e) {
+      if (Util.isConnectionError(e)) {
+        requestStatus = APIRequestStatus.connectionError;
+        notifyListeners();
+      } else {
+        requestStatus = APIRequestStatus.error;
+        notifyListeners();
+      }
+    }
+  }
+
+  getLocation() async {
+    requestStatus = APIRequestStatus.loading;
+    notifyListeners();
+    try {
+      Location body = await service.getLocation();
+      if (body.results!.length > 0) {
+        locations = body;
         requestStatus = APIRequestStatus.loaded;
         notifyListeners();
       } else {
